@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Casa Manila – Architecture Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  
+  <!-- persistent background audio -->
+  <iframe id="audioFrame" src="audio.html"
+    style="position:fixed;bottom:0;right:0;width:1px;height:1px;opacity:0;pointer-events:none;border:none;"
+    aria-hidden="true"></iframe>
+
+  <div class="page-bg-cover"></div>
+
+  <!-- mute button -->
+  <button class="mute-btn" id="muteBtn" aria-label="Toggle background music">
+    <img src="assets/mute/speaker-icon.png" class="speaker-icon" alt="">
+    <img src="assets/mute/muted-icon.svg" class="muted-icon" alt="" style="display:none;">
+  </button>
+
+  <!-- header -->
+  <div class="page-header">
+    <a href="index.html" class="back-btn">Back</a>
+    <div class="baybayin">Casa Manila</div>
+  </div>
+
+  <main class="page-content">
+    <!-- hero -->
+    <section class="arch-hero">
+      <h1 class="arch-title">Casa Manila — Architecture Studio</h1>
+      <p class="arch-sub">An academic architectural study inspired by the colonial bahay-na-bato residence now known as Casa Manila.</p>
+    </section>
+
+    <!-- info grid -->
+    <section class="arch-grid">
+      <article class="arch-card">
+        <h2>Project Abstract</h2>
+        <p>
+          This studio explores Casa Manila’s spatial logic, façade composition, and material language—
+          adobe, wood, capiz, and wrought iron—through measured drawings and visual analysis. The goal
+          is to communicate how form, climate, and culture intersect in the bahay-na-bato typology.
+        </p>
+      </article>
+
+      <article class="arch-card arch-meta">
+        <h2>At a Glance</h2>
+        <ul>
+          <li><span>Typology:</span> Bahay-na-Bato</li>
+          <li><span>Location:</span> Intramuros, Manila</li>
+          <li><span>Focus:</span> Plans • Elevations • Details • Proportions</li>
+          <li><span>Output:</span> PDF Study (embedded below)</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- PDF viewer -->
+    <section class="arch-viewer">
+      <div class="arch-viewer-head">
+        <h2>Project File (PDF)</h2>
+        <div class="arch-actions">
+          <a class="arch-btn" href="assets/CASA/CASA%20MANILA.pdf" download>Download PDF</a>
+          <a class="arch-btn outline" href="assets/CASA/CASA%20MANILA.pdf" target="_blank" rel="noopener">Open Fullscreen</a>
+        </div>
+      </div>
+
+      <div class="pdf-frame">
+        <object data="assets/CASA/CASA%20MANILA.pdf#view=FitH" type="application/pdf" width="100%" height="100%">
+          <iframe src="assets/CASA/CASA%20MANILA.pdf#view=FitH" style="width:100%;height:100%;border:0;"></iframe>
+        </object>
+      </div>
+
+      <p class="pdf-note">
+        Tip: Use the controls above to <b>open fullscreen</b> or <b>download</b> if your browser limits PDF previews.
+      </p>
+    </section>
+  </main>
+  
+
+  <footer>Made with passion by Group Echoes of the Noli  | Para sa Bayan</footer>
+  <script src="script.js"></script>
+</body>
+</html>

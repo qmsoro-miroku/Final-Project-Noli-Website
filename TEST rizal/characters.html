@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Noli Me Tangere – Characters</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- keep bg-music running, same as other pages -->
+  <iframe id="audioFrame" src="audio.html"
+    style="position:fixed;bottom:0;right:0;width:1px;height:1px;opacity:0;pointer-events:none;border:none;"
+    onload="this.contentWindow.focus()"></iframe>
+
+  <div class="page-bg-cover"></div>
+
+  <!-- mute button -->
+  <button class="mute-btn" id="muteBtn" aria-label="Toggle background music">
+    <img src="assets/mute/speaker-icon.png" class="speaker-icon" alt="" />
+    <img src="assets/mute/muted-icon.svg" class="muted-icon" alt="" style="display:none;" />
+  </button>
+
+  <!-- page header -->
+  <div class="page-header">
+    <a href="index.html" class="back-btn">Back</a>
+    <div class="baybayin">Characters</div>
+  </div>
+
+  <main class="page-content">
+    <!-- filter bar -->
+    <div class="char-filter-bar">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="main">Main</button>
+      <button class="chip" data-filter="supporting">Supporting</button>
+      <button class="chip" data-filter="antagonist">Antagonists</button>
+      <button class="chip" data-filter="others">Others</button>
+    </div>
+
+    <!-- MAIN -->
+    <section class="char-section">
+      <h2 class="section-title">Main Characters</h2>
+      <div class="char-grid">
+        <article class="character-card fade-in" data-category="main">
+          <h3>Crisóstomo Ibarra</h3>
+          <p class="role">Protagonist</p>
+          <p>Educated Filipino who returns from Europe to reform his hometown and honor his father’s memory.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="main">
+          <h3>María Clara</h3>
+          <p class="role">Love Interest</p>
+          <p>Symbol of purity and the beloved of Ibarra; her fate reflects the cost of colonial and clerical abuse.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="main">
+          <h3>Padre Dámaso</h3>
+          <p class="role">Friar</p>
+          <p>Arrogant Franciscan who abuses power; central to the injustice suffered by Ibarra’s family.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="main">
+          <h3>Elías</h3>
+          <p class="role">Ally</p>
+          <p>Mysterious boatman who guides Ibarra and represents the revolutionary path versus reform.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SUPPORTING -->
+    <section class="char-section">
+      <h2 class="section-title">Supporting Characters</h2>
+      <div class="char-grid">
+        <article class="character-card fade-in" data-category="supporting">
+          <h3>Kapitán Tiago</h3>
+          <p class="role">Wealthy Patron</p>
+          <p>Influential socialite and foster father of María Clara; chases favor from Church and state.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="supporting">
+          <h3>Pilosopo Tasyo</h3>
+          <p class="role">Philosopher</p>
+          <p>Town sage dismissed as a madman; voices reason and critique of superstition and tyranny.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="supporting">
+          <h3>Sisa</h3>
+          <p class="role">Mother</p>
+          <p>Tragic figure whose suffering mirrors the plight of the powerless under colonial rule.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="supporting">
+          <h3>Basilio &amp; Crispin</h3>
+          <p class="role">Sons of Sisa</p>
+          <p>Choir boys whose fate exposes cruelty within church-controlled institutions.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="supporting">
+          <h3>Tiya Isabel</h3>
+          <p class="role">Guardian</p>
+          <p>Kapitan Tiago’s cousin; oversees María Clara’s upbringing and social duties.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ANTAGONISTS -->
+    <section class="char-section">
+      <h2 class="section-title">Antagonists</h2>
+      <div class="char-grid">
+        <article class="character-card fade-in" data-category="antagonist">
+          <h3>Padre Salvi</h3>
+          <p class="role">Friar</p>
+          <p>Calculating priest who replaces Dámaso; manipulative and cold, exerts control over the town.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="antagonist">
+          <h3>Alférez</h3>
+          <p class="role">Civil Guard</p>
+          <p>Commander of the Guardia Civil; constant power struggle with the friars.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="antagonist">
+          <h3>Doña Victorina</h3>
+          <p class="role">Social Climber</p>
+          <p>Obsessed with Spanish affectations; comic yet biting critique of colonial mentality.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="antagonist">
+          <h3>Doña Consolación</h3>
+          <p class="role">Cruel Matron</p>
+          <p>Wife of the Alférez; sadistic, especially toward Sisa and other townsfolk.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- OTHERS -->
+    <section class="char-section">
+      <h2 class="section-title">Others</h2>
+      <div class="char-grid">
+        <article class="character-card fade-in" data-category="others">
+          <h3>Fr. Sibyla</h3>
+          <p class="role">Dominican</p>
+          <p>Influential priest who often opposes progressive ideas and Ibarra’s school project.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="others">
+          <h3>Victoria &amp; Sinang</h3>
+          <p class="role">Friends of María Clara</p>
+          <p>Lively and supportive companions who reflect the warmth, humor, and loyalty of Filipino womanhood amid social constraints.</p>
+        </article>
+
+        <article class="character-card fade-in" data-category="others">
+          <h3>Lt. Guevara</h3>
+          <p class="role">Sympathetic Officer</p>
+          <p>Reveals truth about Don Rafael’s persecution, guiding Ibarra’s understanding.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>Made with passion by Group Echoes of the Noli  | Para sa Bayan</footer>
+  <script src="script.js"></script>
+</body>
+</html>

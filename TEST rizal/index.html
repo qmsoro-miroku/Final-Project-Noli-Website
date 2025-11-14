@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Noli Me Tangere — Home</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- INDEX-ONLY STYLES -->
+  <style>
+    html,body{height:100%}
+    /* no header + no scrollbar on landing */
+    body{overflow:hidden;}
+
+    /* put content higher on the screen (no more “too low”) */
+    .index-viewport{
+      min-height:100vh;
+      display:grid;
+      justify-items:center;
+      align-content:start;      /* <- key: start, not center */
+      padding-top:6vh;          /* gentle top breathing room */
+    }
+
+    .wrap{ max-width:min(1080px,95vw); width:100%; padding:0 8px; }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px; align-items:center;
+    }
+    @media(max-width:900px){ .hero{ grid-template-columns:1fr; } }
+
+    /* decorative title band (the card sits BEHIND the text) */
+    .h-title{ font-family:'Cinzel',serif; margin:0 0 6px; }
+    .title-band{ position:relative; z-index:0; display:inline-block; color:var(--coffee); font-size:clamp(2rem,3.2vw,2.6rem); letter-spacing:.4px; }
+    .title-band::before{
+      content:""; position:absolute; inset:-12px -16px -8px; z-index:-1;
+      background:linear-gradient(180deg,#fff8ec,#f6e8d2);
+      border:1px solid rgba(90,61,52,.16);
+      border-radius:18px;
+      box-shadow:0 10px 24px rgba(90,61,52,.14), inset 0 1px 0 rgba(255,255,255,.7);
+      filter:drop-shadow(0 6px 14px rgba(0,0,0,.06));
+    }
+
+    .h-sub{ color:#7b5b52; font-style:italic; margin:2px 0 6px; }
+    .h-tag{ color:#5d4037; max-width:640px; }
+
+    .tiles{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(220px,1fr));
+      gap:12px; margin-top:12px;
+    }
+    @media(max-width:600px){ .tiles{ grid-template-columns:1fr; } }
+
+    .tile{
+      display:flex; align-items:center; justify-content:center; text-align:center; text-decoration:none;
+      background:linear-gradient(180deg,#fffdf8,#f6ead8);
+      border:1px solid rgba(90,61,52,.16);
+      border-radius:14px; padding:15px 18px;
+      color:var(--coffee); font:600 .98rem 'Inter',system-ui,sans-serif; letter-spacing:.2px;
+      box-shadow:0 8px 18px rgba(90,61,52,.12), inset 0 2px 0 rgba(255,255,255,.6);
+      transition:transform .15s ease, box-shadow .18s ease, background .2s ease;
+    }
+    .tile:hover{ transform:translateY(-2px); box-shadow:0 14px 28px rgba(90,61,52,.18); }
+
+    .cover-card{
+      background:linear-gradient(180deg,#fffdf8,#f6ead8);
+      border:1px solid rgba(90,61,52,.16);
+      border-radius:16px; padding:14px;
+      box-shadow:0 10px 24px rgba(90,61,52,.15);
+      display:grid; place-items:center;
+    }
+    .cover-card img{ width:100%; height:auto; border-radius:10px; filter:saturate(.92); }
+
+    .spot{
+      margin-top:12px;
+      background:linear-gradient(180deg,#fff8ee,#fff3de);
+      border:1px solid rgba(90,61,52,.14);
+      border-radius:14px; padding:12px;
+      box-shadow:var(--shadow); text-align:center;
+    }
+    .spot h3{ font-family:'Cinzel',serif; color:#6a4a38; font-size:1rem; }
+    .spot p{ color:#6d5243; margin-top:4px; font-size:.95rem; }
+  </style>
+</head>
+
+<body class="index">
+  <!-- persistent bgm -->
+  <iframe id="audioFrame" src="audio.html"
+    style="position:fixed;bottom:0;right:0;width:1px;height:1px;opacity:0;pointer-events:none;border:none;"
+    aria-hidden="true"></iframe>
+
+  <div class="page-bg-cover"></div>
+
+  <main>
+    <section class="index-viewport">
+      <div class="wrap">
+        <div class="hero">
+          <div>
+            <h1 class="h-title"><span class="title-band">Noli Me Tangere</span></h1>
+            <p class="h-sub">A novel by José Rizal</p>
+            <p class="h-tag">Explore the chapters, characters, symbols, and cross-disciplinary work inspired by Rizal.</p>
+
+            <nav class="tiles">
+              <a class="tile" href="reader.html">Start Reading</a>
+              <a class="tile" href="characters.html">Characters</a>
+              <a class="tile" href="cover.html">Cover</a>
+              <a class="tile" href="architecture.html">Intramuros Studio</a>
+              <a class="tile" href="author.html">About Author</a>
+              <a class="tile" href="members.html">Members</a>
+              <a class="tile" href="book.html">About the Book</a>
+            </nav>
+          </div>
+
+          <figure class="cover-card">
+            <img src="assets/covers/noli_cover.jpg" alt="Noli Me Tangere cover">
+          </figure>
+        </div>
+
+        <div class="spot">
+          <h3>Discover the Hidden Meanings</h3>
+          <p>Symbols, themes, and stories that shaped a nation.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- mute -->
+  <button class="mute-btn" id="muteBtn" aria-label="Toggle background music">
+    <img class="speaker-icon" src="assets/mute/speaker-icon.png" alt="">
+    <img class="muted-icon"   src="assets/mute/muted-icon.svg" alt="" style="display:none">
+  </button>
+</body>
+<script src="script.js"></script>
+</html>
