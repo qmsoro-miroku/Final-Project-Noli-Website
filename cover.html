@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Noli Me Tangere — Interactive Cover</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  :root{ --design-w:768; --design-h:1024; }
+
+  /* Wrapper under the fixed header */
+  .ic-wrap{
+    max-width: min(1040px, 96vw);
+    margin: 86px auto 28px;
+    padding: 8px 12px 18px;
+  }
+  .ic-head{
+    display:flex; align-items:flex-start; gap:10px; margin-bottom:12px;
+  }
+  .ic-head h1{
+    margin:0; font-family:'Cinzel',serif; color:var(--coffee);
+    font-size:clamp(18px, 2.8vw, 26px); letter-spacing:.3px;
+  }
+  .ic-controls{ margin-left:auto; display:flex; gap:10px; align-items:center; color:#6b4e45 }
+  .ic-btn{
+    border:1px solid rgba(184,134,11,.6); background:var(--coffee); color:#fff8e7;
+    padding:8px 10px; border-radius:10px; cursor:pointer; font-weight:700; font-size:13px;
+    box-shadow:0 3px 10px rgba(109,76,65,.18);
+  }
+  .ic-btn:hover{ background:var(--gold); color:var(--ink); }
+
+  /* Canvas card – right size, centered */
+  .ic-canvas{
+    position:relative;
+    width: min(92vw, 720px);   /* << controls overall size (fits page) */
+    aspect-ratio: var(--design-w) / var(--design-h);
+    margin: 0 auto;            /* center */
+    border-radius:16px;
+    border:1.5px solid rgba(184,134,11,.55);
+    background:#fff8e7;
+    box-shadow: var(--shadow);
+    overflow: visible;          /* allow tooltips outside */
+  }
+  .cover-img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit: contain;
+    filter: contrast(1) saturate(.92);
+  }
+
+  /* ======= Invisible hotspots (no dots) ======= */
+  .hs{
+    position:absolute; transform:translate(-50%,-50%);
+    background:transparent; border:none; padding:0; margin:0;
+    cursor:pointer; z-index:5; outline:none;
+    /* size & position set inline via % (left/top/width/height) */
+  }
+
+  /* Tooltip */
+  .tip{
+    position:absolute; left:50%; top:-8px; transform:translate(-50%, -100%);
+    min-width:220px; max-width:260px;
+    background:#fff8e7; color:#3e2723;
+    border:1px solid rgba(184,134,11,.55);
+    border-radius:10px; padding:10px 12px;
+    box-shadow:0 12px 24px rgba(0,0,0,.25);
+    font-size:.92rem; line-height:1.5;
+    display:none; z-index:20;
+  }
+  .tip b{ font-family:'Cinzel',serif; color:var(--coffee); display:block; margin-bottom:4px; }
+  .hs:hover .tip, .hs:focus .tip, .hs.active .tip{ display:block; }
+
+  /* Flip below when near the top */
+  .tip.below{ top:auto; bottom:-8px; transform:translate(-50%, 100%); }
+
+  @media (max-width:520px){
+    .ic-canvas{ width: min(94vw, 520px); }
+    .tip{ min-width:180px; max-width:210px; }
+  }
+</style>
+</head>
+<body>
+  <!-- background audio -->
+  <iframe id="audioFrame" src="audio.html"
+    style="position:fixed;bottom:0;right:0;width:1px;height:1px;opacity:0;pointer-events:none;border:none;"></iframe>
+
+  <div class="page-bg-cover"></div>
+
+  <!-- mute -->
+  <button class="mute-btn" id="muteBtn" aria-label="Toggle background music">
+    <img src="assets/mute/speaker-icon.png" class="speaker-icon" alt="">
+    <img src="assets/mute/muted-icon.svg" class="muted-icon" alt="" style="display:none;">
+  </button>
+
+  <!-- header -->
+  <div class="page-header">
+    <a href="index.html" class="back-btn">Back</a>
+    <div class="baybayin">Cover</div>
+  </div>
+
+  <main class="ic-wrap">
+    <div class="ic-head">
+      <h1>Noli Me Tangere — Interactive Cover</h1>
+      <div class="ic-controls">
+        
+      </div>
+    </div>
+
+    <section class="ic-canvas" id="canvas">
+      <img src="assets/covers/noli_cover.jpg" alt="Noli Me Tangere cover" class="cover-img" />
+      <!-- Hotspots injected by JS -->
+    </section>
+  </main>
+
+<script>
+/* ========= Hotspot data (percent based on 768×1024) ========= */
+const HOTSPOTS = [
+  {key:"Babae (María Clara)",           top:14, left:27,  w:10, h:10, desc:"Purity and the ideal Filipina."},
+  {key:"Maze",                           top:51, left:20,  w:10, h:18, desc:"Confusion and entrapment under colonial rule."},
+  {key:"Cross",                          top: 8, left:56,  w:10, h:12, desc:"Faith and sacrifice."},
+  {key:"Sunflower",                      top:59, left:60,  w:10, h:14, desc:"Hope and light—turning toward truth."},
+  {key:"Chains",                         top:80, left:70,  w:11, h:16, desc:"Oppression and social bondage."},
+  {key:"Guardia Civil",                  top:86, left:66,  w: 8, h:12, desc:"Spanish colonial military control."},
+  {key:"Laurel / Pomelo",                top:10, left:51,  w: 9, h: 9, desc:"Victory with a bittersweet tone."},
+  {key:"Crown",                          top:35, left:18,  w: 8, h: 9, desc:"Power and social hierarchy."},
+  {key:"María Clara’s Locket",           top:63, left:22,  w: 8, h: 8, desc:"Memory, identity, and hidden truths."},
+  {key:"Secret Dedication to Parents",   top:33, left:44,  w:12, h: 9, desc:"Veiled tribute to Rizal’s parents."},
+  {key:"Alférez’s Scourge",              top:80, left:69,  w:10, h:12, desc:"Cruelty and abuse of power."},
+  {key:"Bamboo",                         top:53, left:60,  w: 8, h:12, desc:"Resilience and humility of the Filipino spirit."},
+  {key:"Teachers’ Whip",                 top:78, left:60,  w: 7, h:12, desc:"Discipline/punishment linked to schooling."}
+];
+
+const canvas = document.getElementById('canvas');
+
+function positionTip(btn){
+  const tip = btn.querySelector('.tip'); if(!tip) return;
+  const r = btn.getBoundingClientRect();
+  const above = r.top;
+  const below = window.innerHeight - r.bottom;
+  const placeBelow = above < 120 && below > above;
+  tip.classList.toggle('below', placeBelow);
+}
+
+function buildHotspots(){
+  HOTSPOTS.forEach(h=>{
+    const btn = document.createElement('button');
+    btn.className = 'hs';
+    btn.style.left = h.left + '%';
+    btn.style.top  = h.top  + '%';
+    btn.style.width  = h.w + '%';
+    btn.style.height = h.h + '%';
+    btn.setAttribute('aria-label', h.key);
+
+    const tip = document.createElement('div');
+    tip.className = 'tip';
+    tip.innerHTML = `<b>${h.key}</b><span>${h.desc}</span>`;
+    btn.appendChild(tip);
+
+    btn.addEventListener('mouseenter', ()=> positionTip(btn));
+    btn.addEventListener('focus', ()=> positionTip(btn));
+    btn.addEventListener('click', (e)=> {
+      e.stopPropagation();
+      document.querySelectorAll('.hs.active').forEach(x=>x.classList.remove('active'));
+      btn.classList.add('active');
+      positionTip(btn);
+    });
+
+    canvas.appendChild(btn);
+  });
+
+  // Close on outside click / ESC
+  document.addEventListener('click', e=>{
+    if(!e.target.closest('.hs')) document.querySelectorAll('.hs.active').forEach(x=>x.classList.remove('active'));
+  });
+  document.addEventListener('keydown', e=>{
+    if(e.key==='Escape') document.querySelectorAll('.hs.active').forEach(x=>x.classList.remove('active'));
+  });
+
+  // Reset button
+  document.getElementById('reset')?.addEventListener('click', ()=>{
+    document.querySelectorAll('.hs.active').forEach(x=>x.classList.remove('active'));
+  });
+}
+buildHotspots();
+</script>
+
+<main class="page-content">
+  <!-- ALL SYMBOLS -->
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/alfarez_scourge.png" class="symbol-img" alt="Alferez’s Scourge">
+    <h2>Alferez’s Scourge</h2>
+    <div class="symbol-info">Represents colonial brutality, fear, and power enforced through violence. In Noli, it reflects how the Guardia Civil punished innocent Filipinos to maintain control.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/babae.png" class="symbol-img" alt="Woman (Maria Clara)">
+    <h2>Woman (Maria Clara)</h2>
+    <div class="symbol-info">Symbol of purity, dignity, and sacrifice of Filipina women. Mirrors Maria Clara — whose love, virtue, and suffering represent the nation.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/bamboo.png" class="symbol-img" alt="Bamboo">
+    <h2>Bamboo</h2>
+    <div class="symbol-info">Filipino resilience; bending but never breaking. Just like Elias and the common people who endured injustice yet hoped for freedom.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/chains.png" class="symbol-img" alt="Chains">
+    <h2>Chains</h2>
+    <div class="symbol-info">Represents oppression and imprisonment — physical, social, and spiritual. Symbolizes Don Rafael’s wrongful imprisonment and the Filipino nation's bondage.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/cross.png" class="symbol-img" alt="Cross">
+    <h2>Cross</h2>
+    <div class="symbol-info">Faith turned into a tool of control by abusive clergy. Padre Damaso and Padre Salvi used religion to manipulate and dominate Filipinos.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/crown_symbol.png" class="symbol-img" alt="Crown">
+    <h2>Crown</h2>
+    <div class="symbol-info">Political power and colonial authority. Represents Spain’s monarchy and the elite class controlling society and crushing reformists like Ibarra.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/guardia_civil.png" class="symbol-img" alt="Guardia Civil">
+    <h2>Guardia Civil</h2>
+    <div class="symbol-info">Symbol of corruption, abuse, and injustice in the colonial system. They terrorized citizens, framed innocent people, and oppressed the poor — like Sisa and her sons.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/laurel_pomelo.png" class="symbol-img" alt="Laurel & Pomelo">
+    <h2>Laurel & Pomelo</h2>
+    <div class="symbol-info">Laurel = honor & triumph; Pomelo = bitterness & tragedy. Represents bittersweet victory — hope through suffering, like Ibarra’s dream of reform.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/maria_clara_locket.png" class="symbol-img" alt="Maria Clara’s Locket">
+    <h2>Maria Clara’s Locket</h2>
+    <div class="symbol-info">Symbol of love, identity, and truth. Holds her past & secrets — revealing she is Padre Damaso’s daughter and not truly free.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/maze.png" class="symbol-img" alt="Maze">
+    <h2>Maze</h2>
+    <div class="symbol-info">Represents the confusing path to justice in society. Ibarra’s struggles mirror the impossible social maze under Spanish rule.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/secret_dedication_parents.png" class="symbol-img" alt="Secret Dedication">
+    <h2>Secret Dedication</h2>
+    <div class="symbol-info">Rizal's silent tribute to his parents and all Filipinos who suffered injustice. It shows his mission: awaken the Filipino spirit.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/sunflower.png" class="symbol-img" alt="Sunflower">
+    <h2>Sunflower</h2>
+    <div class="symbol-info">Hope, youth, and enlightenment — always turning to light. Much like Rizal believed the Filipino youth would bring the future.</div>
+  </div>
+
+  <div class="symbol-card fade" onclick="toggleSymbol(this)">
+    <img src="assets/symbols/teachers_whip.png" class="symbol-img" alt="Teacher’s Whip">
+    <h2>Teacher’s Whip</h2>
+    <div class="symbol-info">Oppressive education system under friars. Symbol of forced obedience rather than learning — like the abuse suffered by Crispin and Basilio.</div>
+  </div>
+</main>
+
+<footer>Made with passion by Group Echoes of the Noli  | Para sa Bayan</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

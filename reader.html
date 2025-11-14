@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Noli Me Tangere - Reader</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- IDAGDAG SA LAHAT NG .html (index, reader, gallery, etc.) -->
+<iframe id="audioFrame" src="audio.html" style="position:fixed;bottom:0;right:0;width:1px;height:1px;opacity:0;pointer-events:none;border:none;" onload="this.contentWindow.focus()"></iframe>
+<div class="page-bg-cover"></div>
+
+<button class="mute-btn" id="muteBtn">
+  <img src="assets/mute/speaker-icon.png" class="speaker-icon" alt="Sound">
+  <img src="assets/mute/muted-icon.svg" class="muted-icon" alt="Muted" style="display:none;">
+</button>
+
+<div class="page-header">
+  
+  <a href="index.html" class="back-btn">Back</a>
+  <div class="baybayin">Noli me tangere</div>
+  <h1></h1>
+
+</div>
+
+<main class="page-content">
+<!-- SA LOOB NG <main class="page-content">, SA ITAAS NG CHAPTERS -->
+<input 
+  type="text" 
+  id="chapterSearch" 
+  placeholder="Search chapters..." 
+  style="
+    width:100%; 
+    padding:12px; 
+    margin:16px 0; 
+    border-radius:12px; 
+    border:2px solid var(--coffee); 
+    font-size:1rem; 
+    font-family:'Libre Baskerville',serif;
+  ">
+  <!-- ALL 63 CHAPTERS (same as before) -->
+  <div class="chapter-card fade"><h2>Chapter 1: A Social Gathering</h2><p>Capitan Tiago hosts a dinner party...</p></div>
+  
+  <div class="chapter-card fade"><h2>Chapter 2: Crisostomo Ibarra</h2><p>Ibarra visits the cemetery where his father Don Rafael is buried. He meets the gravedigger and learns of the desecration of his father's remains.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 3: The Dinner</h2><p>At the dinner, Padre Damaso openly humiliates Ibarra. Lieutenant Guevara reveals the truth about Don Rafael's imprisonment and death.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 4: Heretic and Filibuster</h2><p>Ibarra is labeled a filibuster. He plans to build a school in memory of his father. Maria Clara arrives with her friends.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 5: A Star in a Dark Night</h2><p>Ibarra and Maria Clara meet in the azotea. The alferez insults Ibarra, leading to a confrontation.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 6: Capitan Tiago</h2><p>Portrait of Capitan Tiago: his wealth, opium habit, and relationship with the friars.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 7: An Idyl on an Azotea</h2><p>Ibarra and Maria Clara exchange love letters through a locket. They discuss their future.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 8: Memories</h2><p>Ibarra recalls his childhood and his old teacher, who is now broken and bitter.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 9: Local Affairs</h2><p>The town of San Diego: its officials, corruption, and the power of the friars.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 10: The Town</h2><p>Description of San Diego, the church, convent, and the cemetery.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 11: The Rulers</h2><p>The civil guard and their abuses. The alferez and his wife Doña Consolación.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 12: All Saints</h2><p>The feast of All Saints. Ibarra and Elias meet at the cemetery.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 13: Signs of Storm</h2><p>Ibarra plans his school. Padre Damaso opposes it.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 14: Tasio: Madman or Philosopher</h2><p>Philosopher Tasio warns Ibarra about the dangers of reform.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 15: The Sacristans</h2><p>Crispin and Basilio serve in the church. Crispin is accused of theft.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 16: Sisa</h2><p>Sisa searches for her sons. She is driven mad by grief.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 17: Basilio</h2><p>Basilio escapes and finds his brother Crispin dead.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 18: Souls in Torment</h2><p>Sisa wanders the town, singing and searching for her children.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 19: A Schoolmaster's Difficulties</h2><p>The schoolmaster is harassed for teaching Spanish.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 20: The Meeting in the Town Hall</h2><p>Ibarra's school project is discussed. Opposition grows.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 21: The Story of a Mother</h2><p>Sisa's tragic past is revealed.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 22: Lights and Shadows</h2><p>Ibarra and Maria Clara's love deepens.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 23: Fishing</h2><p>Ibarra and Elias go fishing. Elias shares his past.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 24: In the Woods</h2><p>Elias tells Ibarra about his family’s tragedy.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 25: In the House of the Philosopher</h2><p>Ibarra visits Tasio for advice.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 26: The Eve of the Fiesta</h2><p>Preparations for the town fiesta begin.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 27: In the Twilight</h2><p>Maria Clara and Ibarra meet secretly.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 28: Correspondence</h2><p>Letters between Maria Clara and Ibarra.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 29: The Sermon</h2><p>Padre Damaso preaches during the fiesta.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 30: The First Cloud</h2><p>Ibarra is insulted during the sermon.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 31: The Crane</h2><p>A crane collapses during the school groundbreaking. Ibarra is blamed.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 32: The Derrick</h2><p>Elias saves Ibarra from the collapsing crane.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 33: Free Thought</h2><p>Ibarra and the liberal youth discuss reform.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 34: The Dinner</h2><p>Ibarra hosts a dinner. Tensions rise.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 35: Comments</h2><p>The town reacts to the dinner incident.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 36: The Outcry</h2><p>Ibarra is accused of rebellion.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 37: The Two Señoras</h2><p>Doña Victorina and Doña Consolación clash.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 38: The Procession</h2><p>The town procession. Sisa appears, mad.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 39: Doña Consolación</h2><p>The alferez’s wife abuses Sisa.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 40: Right and Might</h2><p>Elias rescues Sisa from the civil guards.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 41: Two Visits</h2><p>Ibarra visits Maria Clara. Elias visits Ibarra.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 42: The Espadañas</h2><p>Doña Victorina and Don Tiburcio arrive.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 43: Plans</h2><p>Ibarra and Maria Clara plan their wedding. Padre Damaso objects.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 44: An Examination of Conscience</h2><p>Padre Damaso reflects. Padre Salvi replaces him.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 45: The Persecuted</h2><p>The schoolmaster's family is harassed. Elias helps them escape.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 46: The Cockpit</h2><p>Ibarra and Elias at the cockpit. Lucas plans revenge.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 47: The Two Señoras</h2><p>Doña Victorina and Doña Consolación clash again.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 48: The Enigma</h2><p>Maria Clara discovers her true parentage.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 49: The Voice of the Persecuted</h2><p>Elias tells his life story and hopes for reform.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 50: Elias's Story</h2><p>Elias continues: his family's suffering and injustice.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 51: Exchanges</h2><p>Ibarra and Elias debate reform vs revolution.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 52: The Cards of the Dead</h2><p>Maria Clara falls ill. Padre Damaso returns.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 53: Il Buon Dí Si Conosce Da Mattina</h2><p>The storm breaks. Ibarra is arrested.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 54: News from Ibarra</h2><p>Maria Clara learns of Ibarra's arrest. She confronts Padre Damaso.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 55: The Catastrophe</h2><p>The town is in chaos. Sisa dies. Basilio is orphaned.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 56: What Is Said and What Is Believed</h2><p>Rumors spread. The people believe Ibarra is dead.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 57: Vae Victis!</h2><p>The guards abuse the prisoners. Elias escapes.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 58: The Accursed</h2><p>Ibarra is excommunicated. His school is destroyed.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 59: Patriotism and Self-Interest</h2><p>The town officials distance themselves from Ibarra.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 60: Maria Clara</h2><p>Maria Clara enters the convent. She learns the truth about her father.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 61: The Chase on the Lake</h2><p>Elias helps Ibarra escape. They are pursued on the lake.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 62: Padre Florentino</h2><p>Ibarra reaches Padre Florentino's house. Elias is wounded.</p></div>
+
+  <div class="chapter-card fade"><h2>Chapter 63: Christmas Eve</h2><p>Elias dies. Ibarra and Maria Clara are reunited briefly. Hope for the future.</p></div>
+
+</main>
+<footer>Made with passion by Group Echoes of the Noli  | Para sa Bayan</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
